@@ -151,7 +151,7 @@ const authController = {
             const isSafari = req.body.isSafari === true && refreshToken;
             res.header(
               "Access-Control-Allow-Origin",
-              "https://pick-app.glitch.me"
+              "https://https://pickapp.onrender.com"
             );
             res.header("Access-Control-Allow-Credentials", true);
             res.header(
@@ -205,7 +205,7 @@ const authController = {
           if (updatedRefreshToken) {
             res.header(
               "Access-Control-Allow-Origin",
-              "https://pick-app.glitch.me"
+              "https://https://pickapp.onrender.com"
             );
             res.header("Access-Control-Allow-Credentials", true);
             res.header(
