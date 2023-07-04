@@ -54,9 +54,8 @@ async function connectToDatabase() {
   }
 }
 connectToDatabase();
-const domain = "https://pickprojectbackend.netlify.app";
 const port = process.env.PORT;
 // Start server
-app.listen(domain, () => {
-  console.log(`Server started on ${domain}`);
+app.listen(port, () => {
+  console.log(`Server started on ${port}`);
 });
