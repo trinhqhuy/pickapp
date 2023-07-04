@@ -164,7 +164,7 @@ const authController = {
               secure: false,
               domain: ".onrender.com",
               maxAge: 100 * 24 * 60 * 60 * 1000,
-              sameSite: "strict",
+              sameSite: "none",
             });
             return res
               .status(200)
@@ -218,7 +218,7 @@ const authController = {
               secure: false,
               domain: ".onrender.com",
               maxAge: 100 * 24 * 60 * 60 * 1000,
-              sameSite: "strict",
+              sameSite: "none",
             });
             return res.status(200).json({
               accessToken: newAccessToken,
