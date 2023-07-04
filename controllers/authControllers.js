@@ -162,7 +162,8 @@ const authController = {
             res.cookie("refreshToken", newRefreshToken, {
               httpOnly: true,
               secure: false,
-              path: "/",
+              domain: ".onrender.com",
+              maxAge: 100 * 24 * 60 * 60 * 1000,
               sameSite: "strict",
             });
             return res
@@ -215,7 +216,8 @@ const authController = {
             res.cookie("refreshToken", newRefreshToken, {
               httpOnly: true,
               secure: false,
-              path: "/",
+              domain: ".onrender.com",
+              maxAge: 100 * 24 * 60 * 60 * 1000,
               sameSite: "strict",
             });
             return res.status(200).json({
