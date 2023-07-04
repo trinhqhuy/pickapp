@@ -94,7 +94,7 @@ const authController = {
             secure: false,
             maxAge: 100 * 24 * 60 * 60 * 1000,
             path: "/",
-            sameSite: "strict",
+            sameSite: "none",
           });
           return res.status(200).json({
             user,
