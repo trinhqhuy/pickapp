@@ -16,4 +16,4 @@ const middlewareController = {
     }
   },
 };
-module.export = middlewareController;
+module.exports = middlewareController;

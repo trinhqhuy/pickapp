@@ -188,4 +188,4 @@ const memberController = {
     }
   },
 };
-module.export = memberController;
+module.exports = memberController;

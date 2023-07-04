@@ -1,4 +1,4 @@
-const folderController = require("../controllers/collectionControllers");
+const collectionController = require("../controllers/collectionControllers");
 const middlewareController = require("../controllers/middlewareControllers");
 
 const router = require("express").Router();

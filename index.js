@@ -37,11 +37,6 @@ app.use("/v1/collection", collectionRoute);
 app.use("/v1/palette", paletteRoute);
 app.use("/v1/member", memberRoute);
 app.use("/v1/user", userRoute);
-// Start server
-const port = process.env.PORT;
-app.listen(port, () => {
-  console.log(`Server started on port ${port}`);
-});
 
 // Database
 const url = process.env.MONGOOSE_URL;
@@ -59,3 +54,9 @@ async function connectToDatabase() {
   }
 }
 connectToDatabase();
+const domain = "https://pickprojectbackend.netlify.app";
+const port = process.env.PORT;
+// Start server
+app.listen(domain, () => {
+  console.log(`Server started on ${domain}`);
+});

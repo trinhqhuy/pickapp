@@ -143,4 +143,4 @@ const authController = {
     });
   },
 };
-module.export = authController;
+module.exports = authController;

@@ -99,4 +99,4 @@ const collectionController = {
     }
   },
 };
-module.export = collectionController;
+module.exports = collectionController;
