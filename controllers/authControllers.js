@@ -1,12 +1,12 @@
-import User from "../models/user.js";
-import { genSalt, hash, compare } from "bcrypt";
-import jwt, { verify } from "jsonwebtoken";
-import refreshTokens from "../models/refreshToken.js";
+const User = require("../models/user");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const refreshTokens = require("../models/refreshToken.js");
 const authController = {
   signUp: async (req, res) => {
     try {
-      const salt = await genSalt(10);
-      const hashed = await hash(req.body.password, salt);
+      const salt = await bcrypt.genSalt(10);
+      const hashed = await bcrypt.hash(req.body.password, salt);
       const validUser = await User.find({ username: req.body.username });
       const validEmail = await User.find({ email: req.body.email });
       if (validUser.length > 0) {
@@ -65,7 +65,10 @@ const authController = {
 
       if (!user) return res.status(404).json({ message: "User not founded" });
 
-      const validPassword = await compare(req.body.password, user.password);
+      const validPassword = await bcrypt.compare(
+        req.body.password,
+        user.password
+      );
 
       if (!validPassword)
         return res.status(400).json({ message: "Wrong password" });
@@ -77,7 +80,7 @@ const authController = {
         if (savedToken) {
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
-            secure: false, //the browser cant not set the cookie when set this field true
+            secure: false,
             maxAge: 100 * 24 * 60 * 60 * 1000,
             path: "/",
             sameSite: "strict",
@@ -114,7 +117,7 @@ const authController = {
 
     if (!validToken) return res.status(403).json("Refresh token is not valid");
 
-    verify(refreshToken, process.env.JWT_REFRESH_KEY, async (err, user) => {
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, async (err, user) => {
       if (err) {
         console.log(err);
       }
@@ -140,4 +143,4 @@ const authController = {
     });
   },
 };
-export default authController;
+module.export = authController;

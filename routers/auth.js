@@ -1,8 +1,7 @@
-import { Router } from "express";
-import authController from "../controllers/authControllers.js";
-import middlewareController from "../controllers/middlewareControllers.js";
+const authController = require("../controllers/authControllers");
+const middlewareController = require("../controllers/middlewareControllers");
 
-const router = Router();
+const router = require("express").Router();
 
 router.post("/signup", authController.signUp);
 router.post("/signin", authController.signIn);
@@ -13,4 +12,4 @@ router.post(
   authController.signOut
 );
 
-export default router;
+module.exports = router;

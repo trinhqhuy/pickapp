@@ -1,7 +1,8 @@
-import collectionController from "../controllers/collectionControllers.js";
-import { Router } from "express";
-import middlewareController from "../controllers/middlewareControllers.js";
-const router = Router();
+const folderController = require("../controllers/collectionControllers");
+const middlewareController = require("../controllers/middlewareControllers");
+
+const router = require("express").Router();
+
 router.get(
   "/:id",
   middlewareController.verifyToken,
@@ -22,4 +23,4 @@ router.delete(
   middlewareController.verifyToken,
   collectionController.deleteCollection
 );
-export default router;
+module.exports = router;

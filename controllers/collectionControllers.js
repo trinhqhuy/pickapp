@@ -1,43 +1,40 @@
-import Collection from "../models/collection.js";
-import Member from "../models/member.js";
-import Palette from "../models/palette.js";
+const Collection = require("../models/collection.js");
+const Member = require("../models/member.js");
+const Palette = require("../models/palette.js");
 const collectionController = {
   readCollection: async (req, res) => {
     try {
-      const collection =
-        (await Member.aggregate) <
-        any >
-        [
-          {
-            $match: {
-              _idUser: req.params.id,
-              isIntive: true,
-              isActive: true,
-              isSeenNotify: true,
-            },
+      const collection = await Member.aggregate([
+        {
+          $match: {
+            _idUser: req.params.id,
+            isIntive: true,
+            isActive: true,
+            isSeenNotify: true,
           },
-          {
-            $lookup: {
-              from: "collections",
-              let: { idCollection: { $toObjectId: "$_idCollection" } },
-              pipeline: [
-                {
-                  $match: {
-                    $expr: {
-                      $eq: ["$_id", "$$idCollection"],
-                    },
+        },
+        {
+          $lookup: {
+            from: "collections",
+            let: { idCollection: { $toObjectId: "$_idCollection" } },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$_id", "$$idCollection"],
                   },
                 },
-                {
-                  $sort: {
-                    createdAt: -1, // Sort by createdAt field in descending order
-                  },
+              },
+              {
+                $sort: {
+                  createdAt: -1, // Sort by createdAt field in descending order
                 },
-              ],
-              as: "collection",
-            },
+              },
+            ],
+            as: "collection",
           },
-        ];
+        },
+      ]);
       const collectionsArr = collection.map((m) => m.collection[0]);
       if (!collectionsArr) {
         return res.status(500).json({ message: "Can't find this collection" });
@@ -102,4 +99,4 @@ const collectionController = {
     }
   },
 };
-export default collectionController;
+module.export = collectionController;

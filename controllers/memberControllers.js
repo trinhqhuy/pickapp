@@ -1,6 +1,5 @@
-import User from "../models/user.js";
-import Member from "../models/member.js";
-
+const User = require("../models/user.js");
+const Member = require("../models/member.js");
 const memberController = {
   searchMember: async (req, res) => {
     try {
@@ -33,55 +32,52 @@ const memberController = {
   },
   getAllMember: async (req, res) => {
     try {
-      const members =
-        (await Member.aggregate) <
-        any >
-        [
-          {
-            $match: {
-              _idCollection: req.params.id,
-              isIntive: true,
-              isActive: true,
-              isSeenNotify: true, //For latter
-            },
+      const members = await Member.aggregate([
+        {
+          $match: {
+            _idCollection: req.params.id,
+            isIntive: true,
+            isActive: true,
+            isSeenNotify: true, //For latter
           },
-          {
-            $lookup: {
-              from: "users",
-              let: { idUser: { $toObjectId: "$_idUser" } },
-              pipeline: [
-                {
-                  $match: {
-                    $expr: {
-                      $eq: ["$_id", "$$idUser"],
-                    },
+        },
+        {
+          $lookup: {
+            from: "users",
+            let: { idUser: { $toObjectId: "$_idUser" } },
+            pipeline: [
+              {
+                $match: {
+                  $expr: {
+                    $eq: ["$_id", "$$idUser"],
                   },
                 },
-                {
-                  $sort: {
-                    createdAt: -1, // Sort by createdAt field in descending order
-                  },
+              },
+              {
+                $sort: {
+                  createdAt: -1, // Sort by createdAt field in descending order
                 },
-                {
-                  $project: {
-                    password: 0,
-                    updatedAt: 0,
-                    createdAt: 0,
-                    __v: 0,
-                  },
+              },
+              {
+                $project: {
+                  password: 0,
+                  updatedAt: 0,
+                  createdAt: 0,
+                  __v: 0,
                 },
-              ],
-              as: "user",
-            },
+              },
+            ],
+            as: "user",
           },
-          {
-            $project: {
-              updatedAt: 0,
-              createdAt: 0,
-              __v: 0,
-            },
+        },
+        {
+          $project: {
+            updatedAt: 0,
+            createdAt: 0,
+            __v: 0,
           },
-        ];
+        },
+      ]);
       const memberArr = members.map((items) => {
         return items;
       });
@@ -192,4 +188,4 @@ const memberController = {
     }
   },
 };
-export default memberController;
+module.export = memberController;

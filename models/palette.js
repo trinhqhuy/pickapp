@@ -1,5 +1,5 @@
-import { Schema, model } from "mongoose";
-const paletteSchema = new Schema(
+const mongoose = require("mongoose");
+const paletteSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -39,4 +39,4 @@ const paletteSchema = new Schema(
     },
   }
 );
-export default model("palette", paletteSchema);
+module.exports = mongoose.model("palette", paletteSchema);

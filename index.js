@@ -1,13 +1,13 @@
-import express from "express";
-import cors from "cors";
-import dotenv from "dotenv";
-import mongoose from "mongoose";
-import cookieParser from "cookie-parser";
-import authRoute from "./routers/auth.js";
-import collectionRoute from "./routers/collection.js";
-import paletteRoute from "./routers/palette.js";
-import memberRoute from "./routers/member.js";
-import userRoute from "./routers/user.js";
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+const authRoute = require("./routers/auth");
+const userRoute = require("./routers/user");
+const collectionRoute = require("./routers/collection");
+const paletteRoute = require("./routers/palette");
+const memberRoute = require("./routers/member");
 const app = express();
 dotenv.config();
 

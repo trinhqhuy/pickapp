@@ -1,7 +1,7 @@
-import { Router } from "express";
-import paletteController from "../controllers/palatteControllers.js";
-import middlewareController from "../controllers/middlewareControllers.js";
-const router = Router();
+const paletteController = require("../controllers/palatteControllers");
+const middlewareController = require("../controllers/middlewareControllers");
+
+const router = require("express").Router();
 
 router.get("/:id", middlewareController.verifyToken, paletteController.read);
 router.post("/", middlewareController.verifyToken, paletteController.create);
@@ -11,4 +11,4 @@ router.delete(
   middlewareController.verifyToken,
   paletteController.delete
 );
-export default router;
+module.exports = router;

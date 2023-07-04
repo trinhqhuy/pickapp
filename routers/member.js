@@ -1,8 +1,7 @@
-import memberController from "../controllers/memberControllers.js";
-import { Router } from "express";
-import middlewareController from "../controllers/middlewareControllers.js";
+const memberController = require("../controllers/memberControllers");
+const middlewareController = require("../controllers/middlewareControllers");
 
-const router = Router();
+const router = require("express").Router();
 
 router.post(
   "/search/:name",
@@ -35,4 +34,4 @@ router.post(
   middlewareController.verifyToken,
   memberController.seenNotify
 );
-export default router;
+module.exports = router;

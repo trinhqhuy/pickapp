@@ -1,6 +1,5 @@
-import User from "../models/user.js";
-
-import { genSalt, hash } from "bcrypt";
+const User = require("../models/user");
+const bcrypt = require("bcrypt");
 
 const userController = {
   updateInfoUser: async (req, res) => {
@@ -19,8 +18,8 @@ const userController = {
         );
         if (!user) return res.status(404).json("User not found!");
       } else {
-        const sault = await genSalt(10);
-        const hashed = await hash(req.body.password, sault); //khuc nay giong nhu ma hoa md5 ben php
+        const sault = await bcrypt.genSalt(10);
+        const hashed = await bcrypt.hash(req.body.password, sault); //khuc nay giong nhu ma hoa md5 ben php
         const user = await User.findOneAndUpdate(
           {
             _id: req.params.id,
@@ -42,4 +41,4 @@ const userController = {
     }
   },
 };
-export default userController;
+module.export = userController;

@@ -1,5 +1,4 @@
-import Palette from "../models/palette.js";
-
+const Palette = require("../models/palette.js");
 const paletteController = {
   create: async (req, res) => {
     try {
@@ -45,4 +44,4 @@ const paletteController = {
   },
 };
 
-export default paletteController;
+module.exports = paletteController;

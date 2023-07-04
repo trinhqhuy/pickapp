@@ -1,12 +1,10 @@
-import { Router } from "express";
-import userController from "../controllers/userControllers.js";
-import middlewareController from "../controllers/middlewareControllers.js";
-
-const router = Router();
+const userController = require("../controllers/userControllers");
+const middlewareController = require("../controllers/middlewareControllers");
+const router = require("express").Router();
 
 router.put(
   "/:id",
   middlewareController.verifyToken,
   userController.updateInfoUser
 );
-export default router;
+module.exports = router;
