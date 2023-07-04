@@ -15,11 +15,12 @@ dotenv.config();
 app.use(cookieParser());
 app.use(express.json());
 
-const allowedOrigins = ["http://localhost:5173/", "*"];
+const allowedOrigins = ["https://pick-app.glitch.me", "*"];
 
 const options = {
   origin: allowedOrigins,
   credentials: true,
+  exposedHeaders: ["set-cookie"],
 };
 // app.options(
 //   "http://localhost:5173",

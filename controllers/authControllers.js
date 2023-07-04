@@ -78,6 +78,16 @@ const authController = {
         const refreshToken = authController.generateRefreshToken(user);
         const savedToken = await authController.saveRefreshToken(refreshToken);
         if (savedToken) {
+          res.header(
+            "Access-Control-Allow-Origin",
+            "https://pick-app.glitch.me"
+          );
+          res.header("Access-Control-Allow-Credentials", true);
+          res.header(
+            "Access-Control-Allow-Headers",
+            "Origin, X-Requested-With, Content-Type, Accept"
+          );
+
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: false,
@@ -132,6 +142,13 @@ const authController = {
         return res.status(500).json("Failed to update refresh token");
       }
       if (updatedRefreshToken) {
+        res.header("Access-Control-Allow-Origin", "https://pick-app.glitch.me");
+        res.header("Access-Control-Allow-Credentials", true);
+        res.header(
+          "Access-Control-Allow-Headers",
+          "Origin, X-Requested-With, Content-Type, Accept"
+        );
+
         res.cookie("refreshToken", newRefreshToken, {
           httpOnly: true,
           secure: false,
