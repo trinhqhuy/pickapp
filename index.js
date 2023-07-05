@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: ["http://localhost:5173", "*"],
+    origin: "*",
     methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
     credentials: true,
     preflightContinue: false,
@@ -33,7 +33,6 @@ app.use(
 //   })
 // );
 // Then pass these options to cors:
-app.use(cors(options));
 // Routes
 app.use("/v1/auth", authRoute);
 app.use("/v1/collection", collectionRoute);
