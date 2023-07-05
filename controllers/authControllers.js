@@ -79,7 +79,6 @@ const authController = {
         const savedToken = await authController.saveRefreshToken(refreshToken);
         if (savedToken) {
           const isSafari = req.body.isSafari === true && refreshToken;
-          res.header("Access-Control-Allow-Origin", "*");
           res.header("Access-Control-Allow-Credentials", true);
           res.header(
             "Access-Control-Allow-Headers",
@@ -146,7 +145,6 @@ const authController = {
           }
           if (updatedRefreshToken) {
             const isSafari = req.body.isSafari === true && refreshToken;
-            res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Credentials", true);
             res.header(
               "Access-Control-Allow-Headers",
@@ -197,7 +195,6 @@ const authController = {
             return res.status(500).json("Failed to update refresh token");
           }
           if (updatedRefreshToken) {
-            res.header("Access-Control-Allow-Origin", "*");
             res.header("Access-Control-Allow-Credentials", true);
             res.header(
               "Access-Control-Allow-Headers",
