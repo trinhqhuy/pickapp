@@ -16,9 +16,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 const options = {
-  origin: ["https://pick-app.glitch.me", "http://localhost:5173"],
+  origin: ["https://pick-app.glitch.me", "*"],
   credentials: true,
-  exposedHeaders: ["set-cookie"],
 };
 // app.options(
 //   "http://localhost:5173",
