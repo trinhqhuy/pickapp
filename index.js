@@ -15,10 +15,15 @@ dotenv.config();
 app.use(cookieParser());
 app.use(express.json());
 
-const options = {
-  origin: ["https://pick-app.glitch.me", "*"],
-  credentials: true,
-};
+app.use(
+  cors({
+    origin: ["http://localhost:5173", "*"],
+    methods: ["GET,HEAD,PUT,PATCH,POST,DELETE"],
+    credentials: true,
+    preflightContinue: false,
+    optionsSuccessStatus: 204,
+  })
+);
 // app.options(
 //   "http://localhost:5173",
 //   cors({
