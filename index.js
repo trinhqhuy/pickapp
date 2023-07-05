@@ -40,7 +40,7 @@ app.use("/v1/collection", collectionRoute);
 app.use("/v1/palette", paletteRoute);
 app.use("/v1/member", memberRoute);
 app.use("/v1/user", userRoute);
-app.use(express.static(process.cwd() + "/view")); // running when use vite bundle code
+app.use(express.static(process.cwd() + "/dist")); // running when use vite bundle code
 
 // Database
 const url = process.env.MONGOOSE_URL;
