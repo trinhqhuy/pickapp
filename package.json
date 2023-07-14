@@ -1,5 +1,5 @@
 {
-  "name": "pick-server-app",
+  "name": "pickapp",
   "version": "1.0.0",
   "description": "A simple Node app built on fastify, instantly up and running. Built to be remixed on Glitch.com.",
   "main": "index.js",
@@ -19,7 +19,7 @@
     "node": "16.x"
   },
   "repository": {
-    "url": "https://glitch.com/edit/#!/pick-server-app"
+    "url": "https://glitch.com/edit/#!/pickapp"
   },
   "license": "MIT",
   "keywords": [

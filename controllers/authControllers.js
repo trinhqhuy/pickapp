@@ -78,24 +78,16 @@ const authController = {
         const refreshToken = authController.generateRefreshToken(user);
         const savedToken = await authController.saveRefreshToken(refreshToken);
         if (savedToken) {
-          const isSafari = req.body.isSafari === true && refreshToken;
-          res.header("Access-Control-Allow-Credentials", true);
-          res.header(
-            "Access-Control-Allow-Headers",
-            "Origin, X-Requested-With, Content-Type, Accept"
-          );
-
           res.cookie("refreshToken", refreshToken, {
             httpOnly: true,
             secure: false,
             maxAge: 100 * 24 * 60 * 60 * 1000,
             path: "/",
-            sameSite: "none",
+            sameSite: "Strict",
           });
           return res.status(200).json({
             user,
             accessToken,
-            isSafari,
           });
         }
       }
@@ -115,107 +107,38 @@ const authController = {
     }
   },
   requestRefreshToken: async (req, res) => {
-    if (req.body.isSafari === null) {
-      const refreshToken = req.cookies.refreshToken;
-      if (!refreshToken)
-        return res.status(401).json("You're not authenticated");
+    const refreshToken = req.cookies.refreshToken;
+    if (!refreshToken) return res.status(401).json("You're not authenticated");
 
-      const validToken = await refreshTokens.findOne({
-        token: refreshToken,
-      });
+    const validToken = await refreshTokens.findOne({
+      token: refreshToken,
+    });
 
-      if (!validToken)
-        return res.status(403).json("Refresh token is not valid");
-      jwt.verify(
-        refreshToken,
-        process.env.JWT_REFRESH_KEY,
-        async (err, user) => {
-          if (err) {
-            console.log(err);
-          }
-          const newAccessToken = authController.generateAccessToken(user);
-          const newRefreshToken = authController.generateRefreshToken(user);
-          const updatedRefreshToken = await refreshTokens.findOneAndUpdate(
-            { token: refreshToken },
-            { token: newRefreshToken },
-            { new: true }
-          );
-          if (!updatedRefreshToken) {
-            return res.status(500).json("Failed to update refresh token");
-          }
-          if (updatedRefreshToken) {
-            const isSafari = req.body.isSafari === true && refreshToken;
-            res.header("Access-Control-Allow-Credentials", true);
-            res.header(
-              "Access-Control-Allow-Headers",
-              "Origin, X-Requested-With, Content-Type, Accept"
-            );
-
-            res.cookie("refreshToken", newRefreshToken, {
-              httpOnly: true,
-              secure: false,
-              domain: ".onrender.com",
-              maxAge: 100 * 24 * 60 * 60 * 1000,
-              sameSite: "none",
-            });
-            return res
-              .status(200)
-              .json({ accessToken: newAccessToken, refreshToken: isSafari });
-          }
-        }
+    if (!validToken) return res.status(403).json("Refresh token is not valid");
+    jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, async (err, user) => {
+      if (err) {
+        console.log(err);
+      }
+      const newAccessToken = authController.generateAccessToken(user);
+      const newRefreshToken = authController.generateRefreshToken(user);
+      const updatedRefreshToken = await refreshTokens.findOneAndUpdate(
+        { token: refreshToken },
+        { token: newRefreshToken },
+        { new: true }
       );
-    }
-    if (req.body.isSafari !== null) {
-      const refreshTokenSafari = req.body.isSafari;
-      if (!refreshTokenSafari)
-        return res.status(401).json("You're not authenticated");
-
-      const validToken = await refreshTokens.findOne({
-        token: refreshTokenSafari,
-      });
-
-      if (!validToken)
-        return res.status(403).json("Refresh token is not valid");
-
-      jwt.verify(
-        refreshTokenSafari,
-        process.env.JWT_REFRESH_KEY,
-        async (err, user) => {
-          if (err) {
-            console.log(err);
-          }
-          const newAccessToken = authController.generateAccessToken(user);
-          const newRefreshToken = authController.generateRefreshToken(user);
-          const updatedRefreshToken = await refreshTokens.findOneAndUpdate(
-            { token: refreshTokenSafari },
-            { token: newRefreshToken },
-            { new: true }
-          );
-          if (!updatedRefreshToken) {
-            return res.status(500).json("Failed to update refresh token");
-          }
-          if (updatedRefreshToken) {
-            res.header("Access-Control-Allow-Credentials", true);
-            res.header(
-              "Access-Control-Allow-Headers",
-              "Origin, X-Requested-With, Content-Type, Accept"
-            );
-
-            res.cookie("refreshToken", newRefreshToken, {
-              httpOnly: true,
-              secure: false,
-              domain: ".onrender.com",
-              maxAge: 100 * 24 * 60 * 60 * 1000,
-              sameSite: "none",
-            });
-            return res.status(200).json({
-              accessToken: newAccessToken,
-              refreshToken: newRefreshToken,
-            });
-          }
-        }
-      );
-    }
+      if (!updatedRefreshToken) {
+        return res.status(500).json("Failed to update refresh token");
+      }
+      if (updatedRefreshToken) {
+        res.cookie("refreshToken", newRefreshToken, {
+          httpOnly: true,
+          secure: false,
+          maxAge: 100 * 24 * 60 * 60 * 1000,
+          sameSite: "Strict",
+        });
+        return res.status(200).json({ accessToken: newAccessToken });
+      }
+    });
   },
 };
 module.exports = authController;
