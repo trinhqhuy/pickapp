@@ -48,6 +48,7 @@ Manage Color
   Multiple devices 
   + Responsive for all size of phone, tablet, desktop.
 
-![Grids (1)](https://github.com/trinhqhuy/pickapp/assets/77260252/ef26299a-1e71-4ac8-889e-b78ef861e152)
+
+![Grids (2)](https://github.com/trinhqhuy/pickapp/assets/77260252/ee2755c4-d96e-4408-943e-4942b1c86604)
 
 
