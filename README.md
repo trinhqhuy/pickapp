@@ -1,7 +1,5 @@
 # Pick App
 
-# Notes.
-
 ### About
 
 Pick is a web application that app focus on provide user-friendly and efficient manage palette experience. Combination of ReactJS and TailwindCSS allows for responsive ,visually , stunning pleasing user interface, beside Redux provides a centalized state management to smoother data flow for the app. Vite was the front-end build tool, can help quickly development and deployment the application.
@@ -37,7 +35,7 @@ Pick has some features to help user includes
   + Delete palette
   + Pin palette
 
-Manage Color 
+  Manage Color 
   + Create color 
   + Update color
   + Delete color
