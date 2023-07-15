@@ -49,6 +49,7 @@ Manage Color
   + Responsive for all size of phone, tablet, desktop.
 
 
-![Grids (2)](https://github.com/trinhqhuy/pickapp/assets/77260252/ee2755c4-d96e-4408-943e-4942b1c86604)
+![Grids (3)](https://github.com/trinhqhuy/pickapp/assets/77260252/4f744d8e-70ae-479d-b7af-f6fa8a176183)
+
 
 
