@@ -9,12 +9,12 @@ Pick is a web application that app focus on provide user-friendly and efficient 
 ### Usage 
 
 Check out my app, let try and experience: <a href="https://pickapp.glitch.me">here link</a>
-* Note: I used the free server sometimes some features not working
+* Note: It's beta version, still have some bugs.
 
 ### Features
 
-Notes. includes some features to help user like
-  Manage Accout 
+Pick has some features to help user includes
+  Manage Account 
   + Sign up
   + Sign in
   + Sign out
